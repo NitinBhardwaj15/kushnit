@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc()
+{
+var roll=parseInt(document.getElementById("roll").value);
+if(isNaN(roll))
+	alert("Only numbers are accepted");
+else
+{
+var q=roll%8 + 1;
+var file=q+".txt";
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    document.getElementById("div1").innerHTML="SLIP No. " + q;
+	}
+  }
+xmlhttp.open("POST",file,true);
+xmlhttp.send();
+}
+}
+</script>
+</head>
+<body>
+Enter your Roll Number <input type="text" id="roll">
+<button type="button" onclick="loadXMLDoc()">Display Question</button><br><br>
+<div id="div1" style="font-size:20px; text-align:center"></div><br>
+<div id="myDiv" style="font-size:18px"></div>
+</body>
+</html>
